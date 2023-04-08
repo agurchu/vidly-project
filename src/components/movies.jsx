@@ -6,15 +6,17 @@ function Movies() {
 
   const handleDelete = (movie) => {
     const newMovies = [...movies];
-    return setMovies(newMovies.filter((newMovie) => newMovie._id !== movie));
+    return setMovies(
+      newMovies.filter((newMovie) => newMovie._id !== movie._id)
+    );
   };
 
   return (
-    <div>
+    <>
       {movies.length === 0 ? (
         <p>There are no movies in the database</p>
       ) : (
-        <div>
+        <>
           <p>Showing {movies.length} movies in the database</p>
           <table className="table table-hover">
             <thead>
@@ -35,7 +37,7 @@ function Movies() {
                   <td>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleDelete(movie._id)}
+                      onClick={() => handleDelete(movie)}
                     >
                       Delete
                     </button>
@@ -44,9 +46,9 @@ function Movies() {
               ))}
             </tbody>
           </table>
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 
