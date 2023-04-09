@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import Like from "./common/like";
 
 function Movies() {
   const [movies, setMovies] = useState(getMovies());
@@ -9,6 +10,14 @@ function Movies() {
     return setMovies(
       newMovies.filter((newMovie) => newMovie._id !== movie._id)
     );
+  };
+
+  const handleLiked = (movie) => {
+    const newMovies = [...movies];
+    const index = newMovies.indexOf(movie);
+    newMovies[index].liked = !movies[index].liked;
+    setMovies(newMovies);
+    console.log(movie);
   };
 
   return (
@@ -25,6 +34,8 @@ function Movies() {
                 <th>Genre</th>
                 <th>Stock</th>
                 <th>Rate</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody className="table-group-divider">
@@ -34,6 +45,12 @@ function Movies() {
                   <td>{movie.genre.name}</td>
                   <td>{movie.numberInStock}</td>
                   <td>{movie.dailyRentalRate}</td>
+                  <td>
+                    <Like
+                      liked={movie.liked}
+                      onClick={() => handleLiked(movie)}
+                    />
+                  </td>
                   <td>
                     <button
                       className="btn btn-danger"
