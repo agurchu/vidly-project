@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
+import { paginate } from "../utility/paginate";
 
 function Movies() {
   const [movies, setMovies] = useState(getMovies());
@@ -26,13 +27,18 @@ function Movies() {
     setCurrentPage(page);
   };
 
+  const movieItems = paginate(movies, currentPage, pageSize);
+
   return (
     <>
-      {movies.length === 0 ? (
+      {movieItems.length === 0 ? (
         <p>There are no movies in the database</p>
       ) : (
         <>
-          <p>Showing {movies.length} movies in the database</p>
+          <p>
+            Showing {movieItems.length}{" "}
+            {movieItems.length === 1 ? "movie" : "movies"} in the database
+          </p>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -45,7 +51,7 @@ function Movies() {
               </tr>
             </thead>
             <tbody className="table-group-divider">
-              {movies.map((movie) => (
+              {movieItems.map((movie) => (
                 <tr key={movie._id}>
                   <td>{movie.title}</td>
                   <td>{movie.genre.name}</td>
