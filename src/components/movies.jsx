@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
+import Pagination from "./common/pagination";
 
 function Movies() {
   const [movies, setMovies] = useState(getMovies());
+  const [pageSize, setPageSize] = useState(4);
 
   const handleDelete = (movie) => {
     const newMovies = [...movies];
@@ -18,6 +20,10 @@ function Movies() {
     newMovies[index].liked = !movies[index].liked;
     setMovies(newMovies);
     console.log(movie);
+  };
+
+  const handlePageChange = (page) => {
+    console.log(page);
   };
 
   return (
@@ -63,6 +69,11 @@ function Movies() {
               ))}
             </tbody>
           </table>
+          <Pagination
+            itemsCount={movies.length}
+            pageSize={pageSize}
+            onPageChane={handlePageChange}
+          />
         </>
       )}
     </>
