@@ -6,6 +6,7 @@ import Pagination from "./common/pagination";
 function Movies() {
   const [movies, setMovies] = useState(getMovies());
   const [pageSize, setPageSize] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (movie) => {
     const newMovies = [...movies];
@@ -19,11 +20,10 @@ function Movies() {
     const index = newMovies.indexOf(movie);
     newMovies[index].liked = !movies[index].liked;
     setMovies(newMovies);
-    console.log(movie);
   };
 
   const handlePageChange = (page) => {
-    console.log(page);
+    setCurrentPage(page);
   };
 
   return (
@@ -72,7 +72,8 @@ function Movies() {
           <Pagination
             itemsCount={movies.length}
             pageSize={pageSize}
-            onPageChane={handlePageChange}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
           />
         </>
       )}
