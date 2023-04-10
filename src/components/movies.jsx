@@ -15,7 +15,7 @@ function Movies() {
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
-    const genres = [{ name: "All Genres" }, ...getGenres()];
+    const genres = [{ name: "All Genres", _id: "" }, ...getGenres()];
     setMovies(getMovies());
 
     setGenres(genres);
@@ -50,6 +50,10 @@ function Movies() {
     setCurrentPage(1);
   };
 
+  const handleSort = (path) => {
+    console.log(path);
+  };
+
   return (
     <div className="row">
       <div className="col-3">
@@ -72,6 +76,7 @@ function Movies() {
               movieItems={movieItems}
               onDelete={handleDelete}
               onLiked={handleLiked}
+              onSort={handleSort}
             />
             <Pagination
               itemsCount={filtered.length}
