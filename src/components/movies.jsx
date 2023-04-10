@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
 import { paginate } from "../utility/paginate";
 import ListGroup from "./listGroup";
+import { getGenres } from "../services/fakeGenreService";
 
 function Movies() {
-  const [movies, setMovies] = useState(getMovies());
+  const [movies, setMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setMovies(getMovies());
+    setGenres(getGenres());
+
+    return () => {
+      // Code to be executed on component unmount (equivalent to componentWillUnmount)
+      // Cleanup, unsubscribe from events, etc.
+      // ...
+    };
+  }, []); // Empty dependency array to indicate that the effect should only run once (on mount) and not depend on any props or state
 
   const handleDelete = (movie) => {
     const newMovies = [...movies];
@@ -29,11 +42,16 @@ function Movies() {
   };
 
   const movieItems = paginate(movies, currentPage, pageSize);
+  const handleGenreSelect = (genre) => {
+    console.log(genre);
+  };
 
   return (
-    <div className="movies">
-      <ListGroup />
-      <div>
+    <div className="row">
+      <div className="col-2">
+        <ListGroup items={genres} onItemSelect={handleGenreSelect} />
+      </div>
+      <div className="col">
         {movieItems.length === 0 ? (
           <p>There are no movies in the database</p>
         ) : (
