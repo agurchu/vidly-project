@@ -1,12 +1,19 @@
 import { genres } from "../services/fakeGenreService";
 
 function ListGroup(props) {
+  const { onItemSelect } = props;
   return (
-    <ul class="list-group">
-      <li class="list-group-item">All Genres</li>
+    <ul className="list-group">
+      <li className="list-group-item">All Genres</li>
 
       {genres.map((genre) => (
-        <li class="list-group-item">{genre.name}</li>
+        <li
+          key={genre._id}
+          className="list-group-item"
+          onClick={() => onItemSelect(genre)}
+        >
+          {genre.name}
+        </li>
       ))}
     </ul>
   );
