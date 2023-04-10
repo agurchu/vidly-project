@@ -14,13 +14,8 @@ function Movies() {
 
   useEffect(() => {
     setMovies(getMovies());
-    setGenres(getGenres());
 
-    return () => {
-      // Code to be executed on component unmount (equivalent to componentWillUnmount)
-      // Cleanup, unsubscribe from events, etc.
-      // ...
-    };
+    setGenres(getGenres());
   }, []); // Empty dependency array to indicate that the effect should only run once (on mount) and not depend on any props or state
 
   const handleDelete = (movie) => {
@@ -42,6 +37,7 @@ function Movies() {
   };
 
   const movieItems = paginate(movies, currentPage, pageSize);
+
   const handleGenreSelect = (genre) => {
     console.log(genre);
   };
