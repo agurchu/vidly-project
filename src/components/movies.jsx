@@ -37,7 +37,10 @@ function Movies() {
     setCurrentPage(page);
   };
 
-  const movieItems = paginate(movies, currentPage, pageSize);
+  const filtered = selectedGenre
+    ? movies.filter((m) => m.genre._id === selectedGenre._id)
+    : movies;
+  const movieItems = paginate(filtered, currentPage, pageSize);
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
@@ -98,7 +101,7 @@ function Movies() {
               </tbody>
             </table>
             <Pagination
-              itemsCount={movies.length}
+              itemsCount={filtered.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={handlePageChange}
