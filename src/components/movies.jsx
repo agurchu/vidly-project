@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
-
+import _ from "lodash";
 import Pagination from "./common/pagination";
 import { paginate } from "../utility/paginate";
 import ListGroup from "./listGroup";
@@ -13,6 +13,7 @@ function Movies() {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [sortColumn, setSortColumn] = useState({ path: "title", order: "asc" });
 
   useEffect(() => {
     const genres = [{ name: "All Genres", _id: "" }, ...getGenres()];
@@ -43,7 +44,8 @@ function Movies() {
     selectedGenre && selectedGenre._id
       ? movies.filter((m) => m.genre._id === selectedGenre._id)
       : movies;
-  const movieItems = paginate(filtered, currentPage, pageSize);
+  const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+  const movieItems = paginate(sorted, currentPage, pageSize);
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
@@ -51,7 +53,14 @@ function Movies() {
   };
 
   const handleSort = (path) => {
-    console.log(path);
+    const newSortColumn = { ...sortColumn };
+    if (newSortColumn.path === path) {
+      newSortColumn.order = newSortColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      newSortColumn.path = path;
+      newSortColumn.order = "asc";
+    }
+    setSortColumn(newSortColumn);
   };
 
   return (
