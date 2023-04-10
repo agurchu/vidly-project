@@ -14,9 +14,10 @@ function Movies() {
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
+    const genres = [{ name: "All Genres" }, ...getGenres()];
     setMovies(getMovies());
 
-    setGenres(getGenres());
+    setGenres(genres);
   }, []); // Empty dependency array to indicate that the effect should only run once (on mount) and not depend on any props or state
 
   const handleDelete = (movie) => {
@@ -37,13 +38,15 @@ function Movies() {
     setCurrentPage(page);
   };
 
-  const filtered = selectedGenre
-    ? movies.filter((m) => m.genre._id === selectedGenre._id)
-    : movies;
+  const filtered =
+    selectedGenre && selectedGenre._id
+      ? movies.filter((m) => m.genre._id === selectedGenre._id)
+      : movies;
   const movieItems = paginate(filtered, currentPage, pageSize);
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
+    setCurrentPage(1);
   };
 
   return (

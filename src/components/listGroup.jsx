@@ -7,8 +7,6 @@ function ListGroup(props) {
 
   return (
     <ul className="list-group">
-      <li className="list-group-item">All Genres</li>
-
       {items.map((item) => (
         <li
           onClick={() => onItemSelect(item)}
