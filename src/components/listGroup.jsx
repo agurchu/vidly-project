@@ -1,6 +1,3 @@
-import { values } from "lodash";
-import { genres } from "../services/fakeGenreService";
-
 function ListGroup(props) {
   const { items, textProperty, valueProperty, onItemSelect, selectedItem } =
     props;

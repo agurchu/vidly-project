@@ -1,30 +1,20 @@
 import Like from "./common/like";
+import TableHeader from "./common/tableHeader";
 
 function MoviesTable(props) {
   const { onLiked, onDelete, movieItems, onSort, sortColumn } = props;
+  const columns = [
+    { path: "title", label: "Title" },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
+    { key: "like" },
+    { key: "delete" },
+  ];
 
-  const raiseSort = (path) => {
-    const newSortColumn = { ...sortColumn };
-    if (newSortColumn.path === path) {
-      newSortColumn.order = newSortColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      newSortColumn.path = path;
-      newSortColumn.order = "asc";
-    }
-    onSort(newSortColumn);
-  };
   return (
     <table className="table table-hover">
-      <thead>
-        <tr>
-          <th onClick={() => raiseSort("title")}>Title</th>
-          <th onClick={() => raiseSort("genre.name")}>Genre</th>
-          <th onClick={() => raiseSort("numberInStock")}>Stock</th>
-          <th onClick={() => raiseSort("dailyRentalRate")}>Rate</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
+      <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />
       <tbody className="table-group-divider">
         {movieItems.map((movie) => (
           <tr key={movie._id}>
