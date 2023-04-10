@@ -2,14 +2,23 @@ import { values } from "lodash";
 import { genres } from "../services/fakeGenreService";
 
 function ListGroup(props) {
-  const { items, textProperty, valueProperty, onItemSelect } = props;
+  const { items, textProperty, valueProperty, onItemSelect, selectedItem } =
+    props;
 
   return (
     <ul className="list-group">
       <li className="list-group-item">All Genres</li>
 
       {items.map((item) => (
-        <li key={item[valueProperty]} className="list-group-item">
+        <li
+          onClick={() => onItemSelect(item)}
+          key={item[valueProperty]}
+          className={
+            item === selectedItem
+              ? " list-group-item active"
+              : " list-group-item "
+          }
+        >
           {item[textProperty]}
         </li>
       ))}

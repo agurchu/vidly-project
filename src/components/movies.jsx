@@ -11,6 +11,7 @@ function Movies() {
   const [genres, setGenres] = useState([]);
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
     setMovies(getMovies());
@@ -39,13 +40,17 @@ function Movies() {
   const movieItems = paginate(movies, currentPage, pageSize);
 
   const handleGenreSelect = (genre) => {
-    console.log(genre);
+    setSelectedGenre(genre);
   };
 
   return (
     <div className="row">
       <div className="col-2">
-        <ListGroup items={genres} onItemSelect={handleGenreSelect} />
+        <ListGroup
+          selectedItem={selectedGenre}
+          items={genres}
+          onItemSelect={handleGenreSelect}
+        />
       </div>
       <div className="col">
         {movieItems.length === 0 ? (
