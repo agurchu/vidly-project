@@ -1,15 +1,26 @@
 import Like from "./common/like";
 
 function MoviesTable(props) {
-  const { onLiked, onDelete, movieItems, onSort } = props;
+  const { onLiked, onDelete, movieItems, onSort, sortColumn } = props;
+
+  const raiseSort = (path) => {
+    const newSortColumn = { ...sortColumn };
+    if (newSortColumn.path === path) {
+      newSortColumn.order = newSortColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      newSortColumn.path = path;
+      newSortColumn.order = "asc";
+    }
+    onSort(newSortColumn);
+  };
   return (
     <table className="table table-hover">
       <thead>
         <tr>
-          <th onClick={() => onSort("title")}>Title</th>
-          <th onClick={() => onSort("genre.name")}>Genre</th>
-          <th onClick={() => onSort("numberInStock")}>Stock</th>
-          <th onClick={() => onSort("dailyRentalRate")}>Rate</th>
+          <th onClick={() => raiseSort("title")}>Title</th>
+          <th onClick={() => raiseSort("genre.name")}>Genre</th>
+          <th onClick={() => raiseSort("numberInStock")}>Stock</th>
+          <th onClick={() => raiseSort("dailyRentalRate")}>Rate</th>
           <th></th>
           <th></th>
         </tr>

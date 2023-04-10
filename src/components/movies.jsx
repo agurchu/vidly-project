@@ -52,15 +52,8 @@ function Movies() {
     setCurrentPage(1);
   };
 
-  const handleSort = (path) => {
-    const newSortColumn = { ...sortColumn };
-    if (newSortColumn.path === path) {
-      newSortColumn.order = newSortColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      newSortColumn.path = path;
-      newSortColumn.order = "asc";
-    }
-    setSortColumn(newSortColumn);
+  const handleSort = (sortColumn) => {
+    setSortColumn(sortColumn);
   };
 
   return (
@@ -83,6 +76,7 @@ function Movies() {
             </p>
             <MoviesTable
               movieItems={movieItems}
+              sortColumn={sortColumn}
               onDelete={handleDelete}
               onLiked={handleLiked}
               onSort={handleSort}
