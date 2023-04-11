@@ -2,11 +2,12 @@ import { useState } from "react";
 import Movies from "./components/movies";
 import "./App.css";
 import NavBar from "./components/navBar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Redirect } from "react-router-dom";
 import Home from "./components/home";
 import Products from "./components/products";
 import Posts from "./components/posts";
 import Admin from "./components/admin";
+import NotFound from "./components/notFound";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/posts/:year?/:month?" element={<Posts />} />
           <Route path="/movies" element={<Movies />} />
+          <Route path="/not-found" element={<NotFound />} />
+          <Redirect to="/not-found" />
         </Routes>
       </main>
     </>
