@@ -13,15 +13,15 @@ function App() {
     <>
       <NavBar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/posts" element={<Posts />} />
-      </Routes>
-      {/* <main className="container py-4 px-3 mx-auto">
-        <Movies />
-      </main> */}
+      <main className="container py-4 px-3 mx-auto">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/movies" element={<Movies />} />
+        </Routes>
+      </main>
     </>
   );
 }

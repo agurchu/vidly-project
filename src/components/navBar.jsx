@@ -13,6 +13,9 @@ function NavBar() {
             <Link className="nav-link white-text" to="/">
               home
             </Link>
+            <Link className="nav-link white-text" to="/movies">
+              Movies
+            </Link>
             <Link className="nav-link white-text" to="/products">
               Products
             </Link>
