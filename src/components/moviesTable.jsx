@@ -1,6 +1,5 @@
 import Like from "./common/like";
-import TableBody from "./common/tableBody";
-import TableHeader from "./common/tableHeader";
+import Table from "./common/table";
 
 function MoviesTable(props) {
   const { onLiked, onDelete, movieItems, onSort, sortColumn } = props;
@@ -26,10 +25,12 @@ function MoviesTable(props) {
   ];
 
   return (
-    <table className="table table-hover">
-      <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />
-      <TableBody data={movieItems} columns={columns} />
-    </table>
+    <Table
+      columns={columns}
+      data={movieItems}
+      sortColumn={sortColumn}
+      onSort={onSort}
+    />
   );
 }
 
