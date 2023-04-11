@@ -1,12 +1,16 @@
 import { useState } from "react";
 import Movies from "./components/movies";
 import "./App.css";
+import NavBar from "./components/navBar";
 
 function App() {
   return (
-    <main className="container py-4 px-3 mx-auto">
-      <Movies />
-    </main>
+    <>
+      <NavBar />
+      <main className="container py-4 px-3 mx-auto">
+        <Movies />
+      </main>
+    </>
   );
 }
 
