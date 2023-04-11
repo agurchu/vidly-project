@@ -1,8 +1,7 @@
 import Like from "./common/like";
 import Table from "./common/table";
 
-function MoviesTable(props) {
-  const { onLiked, onDelete, movieItems, onSort, sortColumn } = props;
+function MoviesTable({ onLiked, onDelete, movieItems, onSort, sortColumn }) {
   const columns = [
     { path: "title", label: "Title" },
     { path: "genre.name", label: "Genre" },

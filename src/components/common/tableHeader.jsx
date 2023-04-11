@@ -1,6 +1,4 @@
-function TableHeader(props) {
-  const { columns, onSort, sortColumn } = props;
-
+function TableHeader({ columns, onSort, sortColumn }) {
   const raiseSort = (path) => {
     const newSortColumn = { ...sortColumn };
     if (newSortColumn.path === path) {
