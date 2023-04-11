@@ -10,8 +10,8 @@ function ListGroup(props) {
           key={item[valueProperty]}
           className={
             item === selectedItem
-              ? " list-group-item active"
-              : " list-group-item "
+              ? " list-group-item clickable active"
+              : " list-group-item clickable"
           }
         >
           {item[textProperty]}

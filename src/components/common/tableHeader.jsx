@@ -1,5 +1,6 @@
 function TableHeader(props) {
   const { columns, onSort, sortColumn } = props;
+
   const raiseSort = (path) => {
     const newSortColumn = { ...sortColumn };
     if (newSortColumn.path === path) {
@@ -10,15 +11,24 @@ function TableHeader(props) {
     }
     onSort(newSortColumn);
   };
+
+  const raiseSortIcon = (column) => {
+    if (column.path !== sortColumn.path) return null;
+
+    if (sortColumn.order === "asc") return <i className="fa fa-sort-asc"></i>;
+    return <i className="fa fa-sort-desc"></i>;
+  };
+
   return (
     <thead>
       <tr>
         {columns.map((column, index) => (
           <th
+            className="clickable"
             onClick={() => raiseSort(column.path)}
             key={`${column.path || column.key}-${index}`}
           >
-            {column.label}
+            {column.label} {raiseSortIcon(column)}
           </th>
         ))}
       </tr>
