@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Movies from "./components/movies";
 import "./App.css";
 import NavBar from "./components/navBar";
@@ -24,6 +23,8 @@ function App(props) {
             element={<Products sortBy="newest" {...props} />}
           />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/users" element={<Admin />} />
+          <Route path="/admin/posts" element={<Admin />} />
           <Route path="/posts/:year?/:month?" element={<Posts />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/not-found" element={<NotFound />} />
