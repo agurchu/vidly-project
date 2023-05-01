@@ -10,19 +10,18 @@ export default function LoginForm() {
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    username: Joi.string().required(),
-    password: Joi.string().required(),
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
   });
 
   const validate = () => {
     const errors = {};
-    const validationResult = schema.validate(account, { abortEarly: false });
-    console.log(validationResult);
-    if (account.username.trim() === "")
-      errors.username = "Username is required.";
-    if (account.password.trim() === "")
-      errors.password = "password is required.";
-    return Object.keys(errors).length === 0 ? null : errors;
+    const option = { abortEarly: false };
+    const { error } = schema.validate(account, option);
+    if (!error) return null;
+
+    for (let item of error.details) errors[item.path[0]] = item.message;
+    return errors;
   };
 
   const validateProperty = ({ name, value }) => {
