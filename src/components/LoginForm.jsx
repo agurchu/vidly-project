@@ -6,10 +6,27 @@ export default function LoginForm() {
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+
+    if (account.username.trim() === "")
+      errors.username = "Username is required.";
+    if (account.password.trim() === "")
+      errors.password = "password is required.";
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(account);
+
+    const errors = validate();
+
+    setErrors(errors || {});
+    if (errors) return;
+
+    console.log("submitted");
   };
 
   const handleChange = (e) => {
@@ -27,6 +44,7 @@ export default function LoginForm() {
           onChange={handleChange}
           value={account.username}
           type="text"
+          error={errors.username}
         />
         <Input
           name="password"
@@ -34,6 +52,7 @@ export default function LoginForm() {
           onChange={handleChange}
           type="password"
           value={account.password}
+          error={errors.password}
         />
 
         <button className="btn btn-primary">Login</button>
