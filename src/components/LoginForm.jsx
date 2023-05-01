@@ -18,12 +18,21 @@ export default function LoginForm() {
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
+  const validateProperty = ({ name, value }) => {
+    if (name === "username" && value.trim() === "") {
+      return "Username is required.";
+    }
+    if (name === "password" && value.trim() === "") {
+      return "Password is required.";
+    }
+    return null;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const errors = validate();
-
     setErrors(errors || {});
+
     if (errors) return;
 
     console.log("submitted");
@@ -31,6 +40,14 @@ export default function LoginForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const errorMsg = validateProperty(e.target);
+    const updatedErrors = { ...errors };
+    if (errorMsg) {
+      updatedErrors[name] = errorMsg;
+    } else {
+      delete updatedErrors[name];
+    }
+    setErrors(updatedErrors);
     setAccount((prevState) => ({ ...prevState, [name]: value }));
   };
 
