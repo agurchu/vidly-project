@@ -1,10 +1,16 @@
 import React from "react";
 
 export default function LoginForm() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("submited");
+  };
+
   return (
     <div>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <label className="mb-2" htmlFor="username">
             Username
