@@ -1,30 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
     <header className="bg-dark  ">
       <nav className="container navbar bg-body-tertiary navbar-expand ">
         <div className="container-fluid">
-          <Link className="navbar-brand white-text" to="/">
+          <NavLink className="navbar-brand white-text" to="/">
             Katlego J Dev
-          </Link>
+          </NavLink>
           <div className="navbar-nav">
-            <Link className="nav-link white-text" to="/">
+            <NavLink className="nav-link white-text" to="/">
               home
-            </Link>
-            <Link className="nav-link white-text" to="/movies">
+            </NavLink>
+            <NavLink className="nav-link white-text" to="/movies">
               Movies
-            </Link>
-            <Link className="nav-link white-text" to="/products">
-              Products
-            </Link>
-            <Link className="nav-link white-text" to="/posts/2018/08">
-              Posts
-            </Link>
-            <Link className="nav-link white-text" to="/admin">
-              Admin
-            </Link>
+            </NavLink>
+            <NavLink className="nav-link white-text" to="/customers">
+              Customers
+            </NavLink>
+            <NavLink className="nav-link white-text" to="/rentals">
+              Rentals
+            </NavLink>
           </div>
         </div>
       </nav>
