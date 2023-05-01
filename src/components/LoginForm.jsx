@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Input from "./common/Input";
+import Joi from "joi-browser";
 
 export default function LoginForm() {
   const [account, setAccount] = useState({
@@ -8,9 +9,15 @@ export default function LoginForm() {
   });
   const [errors, setErrors] = useState({});
 
+  const schema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+  });
+
   const validate = () => {
     const errors = {};
-
+    const validationResult = schema.validate(account, { abortEarly: false });
+    console.log(validationResult);
     if (account.username.trim() === "")
       errors.username = "Username is required.";
     if (account.password.trim() === "")
