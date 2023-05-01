@@ -3,21 +3,18 @@ import Input from "./common/Input";
 import Joi from "joi-browser";
 
 export default function LoginForm() {
-  const [account, setAccount] = useState({
-    username: "",
-    password: "",
-  });
+  const [account, setAccount] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
 
-  const schema = Joi.object({
+  const schema = {
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().label("Password"),
-  });
+  };
 
   const validate = () => {
     const errors = {};
-    const option = { abortEarly: false };
-    const { error } = schema.validate(account, option);
+    const options = { abortEarly: false };
+    const { error } = Joi.validate(account, schema, options);
     if (!error) return null;
 
     for (let item of error.details) errors[item.path[0]] = item.message;
@@ -25,13 +22,10 @@ export default function LoginForm() {
   };
 
   const validateProperty = ({ name, value }) => {
-    if (name === "username" && value.trim() === "") {
-      return "Username is required.";
-    }
-    if (name === "password" && value.trim() === "") {
-      return "Password is required.";
-    }
-    return null;
+    const obj = { [name]: value };
+    const subSchema = { [name]: schema[name] };
+    const { error } = Joi.validate(obj, subSchema);
+    return error ? error.details[0].message : null;
   };
 
   const handleSubmit = (e) => {
@@ -40,7 +34,6 @@ export default function LoginForm() {
     setErrors(errors || {});
 
     if (errors) return;
-
     console.log("submitted");
   };
 
