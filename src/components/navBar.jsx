@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav className=" navbar bg-body-tertiary navbar-expand-lg   ">
+    <nav className=" navbar bg-body-tertiary navbar-expand ">
       <div className="container-fluid">
         <Link className="navbar-brand " to="/">
           Katlego J Dev
@@ -31,6 +31,10 @@ function NavBar() {
 
             <NavLink className="nav-link " to="/rentals">
               Rentals
+            </NavLink>
+
+            <NavLink className="nav-link " to="/login">
+              Login
             </NavLink>
           </ul>
         </div>

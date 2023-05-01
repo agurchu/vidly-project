@@ -7,6 +7,7 @@ import Layouts from "./components/Layouts";
 import Customers from "./components/Customers";
 import Rentals from "./components/Rentals";
 import MovieForm from "./components/MovieForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<Layouts />}>
         <Route index element={<Movies />} />
         <Route path="/movies/:id" element={<MovieForm />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/rentals" element={<Rentals />} />
         <Route path="/movies" element={<Movies />} />
