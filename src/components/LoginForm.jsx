@@ -29,16 +29,17 @@ export default function LoginForm() {
                 name="username"
                 label=" Username"
                 onChange={handleChange}
-                value={data.username}
+                value={data[username]}
                 type="text"
                 error={errors.username}
               />
+
               <Input
                 name="password"
                 label="Password"
                 onChange={handleChange}
                 type="password"
-                value={data.password}
+                value={data[password]}
                 error={errors.password}
               />
 
