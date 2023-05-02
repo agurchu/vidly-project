@@ -6,6 +6,7 @@ import { paginate } from "../utility/paginate";
 import ListGroup from "./listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
+import { Link } from "react-router-dom";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -66,6 +67,9 @@ function Movies() {
         />
       </div>
       <div className="col">
+        <Link to="/movies/new" className="btn btn-primary mb-2 ">
+          New Movie
+        </Link>
         {movieItems.length === 0 ? (
           <p>There are no movies in the database</p>
         ) : (
