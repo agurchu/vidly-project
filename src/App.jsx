@@ -8,6 +8,7 @@ import Customers from "./components/Customers";
 import Rentals from "./components/Rentals";
 import MovieForm from "./components/MovieForm";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route index element={<Movies />} />
         <Route path="/movies/:id" element={<MovieForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/rentals" element={<Rentals />} />
         <Route path="/movies" element={<Movies />} />
