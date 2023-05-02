@@ -1,21 +1,7 @@
-import React, { useState } from "react";
-import Input from "./common/Input";
+import React from "react";
 import Joi from "joi-browser";
 
-export default function LoginForm() {
-  const [data, setData] = useState({ username: "", password: "" });
-  const [errors, setErrors] = useState({});
-
-  const schema = {
-    username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password"),
-  };
-
-  const doSubmit = () => {
-    // call server
-    console.log("submitted");
-  };
-
+export default function Form() {
   const validate = () => {
     const errors = {};
     const options = { abortEarly: false };
@@ -54,32 +40,4 @@ export default function LoginForm() {
     setErrors(updatedErrors);
     setData((prevState) => ({ ...prevState, [name]: value }));
   };
-
-  return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <Input
-          name="username"
-          label=" Username"
-          onChange={handleChange}
-          value={data.username}
-          type="text"
-          error={errors.username}
-        />
-        <Input
-          name="password"
-          label="Password"
-          onChange={handleChange}
-          type="password"
-          value={data.password}
-          error={errors.password}
-        />
-
-        <button disabled={validate()} className="btn btn-primary">
-          Login
-        </button>
-      </form>
-    </div>
-  );
 }
