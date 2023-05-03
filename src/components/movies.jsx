@@ -7,12 +7,14 @@ import ListGroup from "./listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import { Link } from "react-router-dom";
+import SearchBox from "./common/SearchBox";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [sortColumn, setSortColumn] = useState({ path: "title", order: "asc" });
 
@@ -41,15 +43,25 @@ function Movies() {
     setCurrentPage(page);
   };
 
-  const filtered =
-    selectedGenre && selectedGenre._id
-      ? movies.filter((m) => m.genre._id === selectedGenre._id)
-      : movies;
+  let filtered = movies;
+  if (searchQuery)
+    filtered = movies.filter((m) =>
+      m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+    );
+  else if (selectedGenre && selectedGenre._id)
+    filtered = movies.filter((m) => m.genre._id === selectedGenre._id);
+
   const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
   const movieItems = paginate(sorted, currentPage, pageSize);
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setSelectedGenre(null);
+    setCurrentPage(1);
+  };
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
+    setSearchQuery("");
     setCurrentPage(1);
   };
 
@@ -78,6 +90,7 @@ function Movies() {
               Showing {movieItems.length}{" "}
               {movieItems.length === 1 ? "movie" : "movies"} in the database
             </p>
+            <SearchBox value={searchQuery} onChange={handleSearch} />
             <MoviesTable
               movieItems={movieItems}
               sortColumn={sortColumn}
