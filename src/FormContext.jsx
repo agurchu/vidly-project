@@ -45,6 +45,7 @@ export default function FormProvider({ children, schema, onSubmit }) {
     setErrors(updatedErrors);
     setData((prevState) => ({ ...prevState, [name]: value }));
   };
+
   return (
     <FormContext.Provider
       value={{ data, errors, handleChange, handleSubmit, validate }}

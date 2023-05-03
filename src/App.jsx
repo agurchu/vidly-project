@@ -13,20 +13,22 @@ import FormProvider from "./FormContext";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layouts />}>
-        <Route index element={<Movies />} />
-        <Route path="/movies/:id" element={<MovieForm />} />
+    <FormProvider>
+      <Routes>
+        <Route path="/" element={<Layouts />}>
+          <Route index element={<Movies />} />
+          <Route path="/movies/:id" element={<MovieForm />} />
 
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/rentals" element={<Rentals />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="/*" element={<Navigate to="/not-found" />} />
-      </Route>
-    </Routes>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/rentals" element={<Rentals />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/not-found" element={<NotFound />} />
+          <Route path="/*" element={<Navigate to="/not-found" />} />
+        </Route>
+      </Routes>
+    </FormProvider>
   );
 }
 

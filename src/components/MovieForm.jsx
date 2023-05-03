@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Joi, { options } from "joi-browser";
+import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovie, saveMovies } from "../services/fakeMovieService";
 import Input from "./common/Input";
@@ -10,7 +10,7 @@ import Select from "./common/Select";
 export default function MovieForm() {
   const { id } = useParams();
   const [genres, setGenres] = useState([]);
-  const [errors, setErrors] = useState({});
+
   const [data, setData] = useState({
     title: "",
     genreId: "",
@@ -63,6 +63,7 @@ export default function MovieForm() {
     saveMovies(data);
     console.log("submitted");
   };
+
   return (
     <FormProvider schema={schema} onSubmit={doSubmit}>
       <div>
@@ -79,7 +80,7 @@ export default function MovieForm() {
                 error={errors.title}
               />
               <Select
-                name={genres}
+                name="genreId"
                 value={data.genres}
                 label="Genre"
                 options={genres}

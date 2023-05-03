@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Input from "./common/Input";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
 import FormProvider, { FormContext } from "../FormContext";
 
 export default function LoginForm() {
-  const [data, setData] = useState({ username: "", password: "" });
+  const [account, setAccount] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
 
   const schema = {
@@ -15,6 +15,7 @@ export default function LoginForm() {
 
   const doSubmit = () => {
     // call server
+
     console.log("submitted");
   };
 
@@ -29,7 +30,7 @@ export default function LoginForm() {
                 name="username"
                 label=" Username"
                 onChange={handleChange}
-                value={data[username]}
+                value={data.username}
                 type="text"
                 error={errors.username}
               />
@@ -39,7 +40,7 @@ export default function LoginForm() {
                 label="Password"
                 onChange={handleChange}
                 type="password"
-                value={data[password]}
+                value={data.password}
                 error={errors.password}
               />
 
