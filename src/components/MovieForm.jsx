@@ -74,14 +74,15 @@ export default function MovieForm() {
                 name="title"
                 label="Title"
                 onChange={handleChange}
-                value={datatitle}
+                value={data.title}
                 type="text"
                 error={errors.title}
               />
               <Select
                 name={genres}
                 value={data.genres}
-                options={options}
+                label="Genre"
+                options={genres}
                 onChange={handleChange}
                 error={errors.genres}
               />
